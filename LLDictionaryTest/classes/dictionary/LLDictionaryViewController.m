@@ -28,6 +28,7 @@
     _searchTextField.borderStyle = UITextBorderStyleNone;
     _searchTextField.backgroundColor = [UIColor colorWithRed:0.2 green:0.9 blue:0.5 alpha:0.3];
     _searchTextField.textAlignment = NSTextAlignmentCenter;
+    _searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     _searchTextField.text = NSLocalizedString(@"SearchWordTextField", @"Default text for search field.");
     self.navigationItem.titleView = _searchTextField;
 
