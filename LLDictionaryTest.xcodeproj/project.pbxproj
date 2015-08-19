@@ -15,6 +15,7 @@
 		40F302221B850298000791F8 /* LLDictionaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F302201B850298000791F8 /* LLDictionaryViewController.m */; };
 		40F302231B850298000791F8 /* LLDictionaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40F302211B850298000791F8 /* LLDictionaryViewController.xib */; };
 		40F302321B8520E9000791F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 40F302301B8520E9000791F8 /* Localizable.strings */; };
+		40F302361B8525A9000791F8 /* LLDictionaryStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F302351B8525A9000791F8 /* LLDictionaryStore.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,6 +44,8 @@
 		40F302211B850298000791F8 /* LLDictionaryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = LLDictionaryViewController.xib; path = dictionary/LLDictionaryViewController.xib; sourceTree = "<group>"; };
 		40F302311B8520E9000791F8 /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ru-RU"; path = "ru-RU.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		40F302331B8520F4000791F8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		40F302341B8525A9000791F8 /* LLDictionaryStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLDictionaryStore.h; path = dictionary/LLDictionaryStore.h; sourceTree = "<group>"; };
+		40F302351B8525A9000791F8 /* LLDictionaryStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLDictionaryStore.m; path = dictionary/LLDictionaryStore.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +138,8 @@
 				40F3021F1B850298000791F8 /* LLDictionaryViewController.h */,
 				40F302201B850298000791F8 /* LLDictionaryViewController.m */,
 				40F302211B850298000791F8 /* LLDictionaryViewController.xib */,
+				40F302341B8525A9000791F8 /* LLDictionaryStore.h */,
+				40F302351B8525A9000791F8 /* LLDictionaryStore.m */,
 			);
 			name = dictionary;
 			sourceTree = "<group>";
@@ -244,6 +249,7 @@
 				40F302221B850298000791F8 /* LLDictionaryViewController.m in Sources */,
 				40F301F51B84FFC0000791F8 /* main.m in Sources */,
 				40F3021B1B8500A7000791F8 /* AppDelegate.m in Sources */,
+				40F302361B8525A9000791F8 /* LLDictionaryStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
