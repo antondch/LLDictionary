@@ -48,4 +48,20 @@
     return _privateTransList;
 }
 
+-(void)addWord:(NSString *)word withTranslation:(NSString *)translation{
+    [_privateWordList addObject:word];
+    [_privateTransList addObject:translation];
+}
+
+-(void)removeWord:(NSString *)word{
+    NSUInteger idx = [_privateWordList indexOfObject:word];
+    if(idx == NSNotFound){
+        idx = [_privateTransList indexOfObject:word];
+    }
+    if(idx != NSNotFound){
+        [_privateWordList removeObjectAtIndex:idx];
+        [_privateTransList removeObjectAtIndex:idx];
+    }
+}
+
 @end

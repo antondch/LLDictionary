@@ -19,4 +19,8 @@
 
 @property(nonatomic, readonly) NSArray *allOriginalWords;
 @property(nonatomic, readonly) NSArray *allTranslations;
+
+-(void)addWord:(NSString*)word withTranslation:(NSString*)translation;
+-(void)removeWord:(NSString*)word;
+
 @end
