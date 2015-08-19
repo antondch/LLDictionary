@@ -73,15 +73,33 @@
     NSData *translations = [NSKeyedArchiver archivedDataWithRootObject:_privateTransList];
     if(_storage){
         //fixme: запилить константы на имена и проверить сохранность данных.
-        if ([_storage respondsToSelector:@selector(saveData:withName:)]) {
+        if ([_storage respondsToSelector:@selector(saveData:withName:)]){
             result = [_storage saveData:originals withName:@"originals"];
             if(result){
                 result =  [_storage saveData:translations withName:@"translations"];
             }
-            
         }
     }
     return result;
+}
+
+-(BOOL)load{
+    BOOL result = NO;
+   if ([_storage respondsToSelector:@selector(loadDataWithName:)]){
+       @try{
+           NSData *originals = [_storage loadDataWithName:@"originals"];
+           NSData *translations = [_storage loadDataWithName:@"translations"];
+            _privateWordList = [NSKeyedUnarchiver unarchiveObjectWithData:originals];
+            _privateTransList = [NSKeyedUnarchiver unarchiveObjectWithData:translations];
+           if([_privateTransList count]==[_privateWordList count]){
+               result = YES;
+           }
+       }@catch(NSException *exception){
+           NSLog(@"Error loading data from device: %@", exception.reason);
+           result = NO;
+       }
+       return result;
+   }
 }
 
 @end
