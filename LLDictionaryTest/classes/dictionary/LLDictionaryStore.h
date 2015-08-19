@@ -8,8 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@interface LLDictionaryStore : NSObject
+@interface LLDictionaryStore : NSObject{
+    //array of original words
+    NSMutableArray *_privateWordList;
+    //array of translations
+    NSMutableArray *_privateTransList;
+}
+
 +(instancetype)sharedStore;
 
-@property(nonatomic,readonly) NSArray *allItems;
+@property(nonatomic, readonly) NSArray *allOriginalWords;
+@property(nonatomic, readonly) NSArray *allTranslations;
 @end

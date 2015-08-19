@@ -8,6 +8,9 @@
 
 #import "LLDictionaryStore.h"
 
+@interface LLDictionaryStore()
+@end
+
 @implementation LLDictionaryStore
 
 #pragma mark - init section
@@ -21,11 +24,11 @@
     return sharedStore;
 }
 
--(instancetype)initPrivate
-{
+-(instancetype)initPrivate{
     self = [super init];
     if(self){
-
+        _privateWordList = [[NSMutableArray alloc]init];
+        _privateTransList = [[NSMutableArray alloc]init];
     }
     return  self;
 }
@@ -35,5 +38,14 @@
     return nil;
 }
 
+#pragma mark - get & set words
+
+-(NSArray*)allOriginalWords{
+    return _privateWordList;
+}
+
+-(NSArray*)allTranslations{
+    return _privateTransList;
+}
 
 @end
