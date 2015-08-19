@@ -12,6 +12,7 @@
 @end
 
 @implementation LLDictionaryStore
+@synthesize storage = _storage;
 
 #pragma mark - init section
 
@@ -62,6 +63,25 @@
         [_privateWordList removeObjectAtIndex:idx];
         [_privateTransList removeObjectAtIndex:idx];
     }
+}
+
+#pragma mark - save & load
+
+-(BOOL)save{
+    BOOL result = NO;
+    NSData *originals = [NSKeyedArchiver archivedDataWithRootObject:_privateWordList];
+    NSData *translations = [NSKeyedArchiver archivedDataWithRootObject:_privateTransList];
+    if(_storage){
+        //fixme: запилить константы на имена и проверить сохранность данных.
+        if ([_storage respondsToSelector:@selector(saveData:withName:)]) {
+            result = [_storage saveData:originals withName:@"originals"];
+            if(result){
+                result =  [_storage saveData:translations withName:@"translations"];
+            }
+            
+        }
+    }
+    return result;
 }
 
 @end
