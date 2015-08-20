@@ -10,12 +10,10 @@
 #import "IStorage.h"
 
 @interface LLDictionaryStore : NSObject{
-    //array of words & translations
+    //array of LLWordItem
     NSMutableArray *_privateWordList;
     
     id<StorageDelegate> _storage;
-    
-
 }
 
 +(instancetype)sharedStore;

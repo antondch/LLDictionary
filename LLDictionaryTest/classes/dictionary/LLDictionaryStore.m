@@ -61,9 +61,11 @@ static NSString * const DIC_FILE_NAME = @"words";
 
 -(BOOL)save{
     BOOL result = NO;
+    if([_privateWordList count]==0){
+        return NO;
+    }
     NSData *words = [NSKeyedArchiver archivedDataWithRootObject:_privateWordList];
     if(_storage){
-        //fixme: проверить сохранность данных.
         if ([_storage respondsToSelector:@selector(saveData:withName:)]){
             result = [_storage saveData:words withName:DIC_FILE_NAME];
         }
