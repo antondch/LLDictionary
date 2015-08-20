@@ -17,6 +17,7 @@
 		40F302321B8520E9000791F8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 40F302301B8520E9000791F8 /* Localizable.strings */; };
 		40F302361B8525A9000791F8 /* LLDictionaryStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F302351B8525A9000791F8 /* LLDictionaryStore.m */; };
 		40F3023A1B8530C6000791F8 /* IStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F302391B8530C6000791F8 /* IStorage.m */; };
+		40F3023D1B85E621000791F8 /* LLWordItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F3023C1B85E621000791F8 /* LLWordItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,8 @@
 		40F302351B8525A9000791F8 /* LLDictionaryStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLDictionaryStore.m; path = dictionary/LLDictionaryStore.m; sourceTree = "<group>"; };
 		40F302381B8530C6000791F8 /* IStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = IStorage.h; path = storage/IStorage.h; sourceTree = "<group>"; };
 		40F302391B8530C6000791F8 /* IStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IStorage.m; path = storage/IStorage.m; sourceTree = "<group>"; };
+		40F3023B1B85E621000791F8 /* LLWordItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLWordItem.h; path = dictionary/LLWordItem.h; sourceTree = "<group>"; };
+		40F3023C1B85E621000791F8 /* LLWordItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLWordItem.m; path = dictionary/LLWordItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +147,8 @@
 				40F302211B850298000791F8 /* LLDictionaryViewController.xib */,
 				40F302341B8525A9000791F8 /* LLDictionaryStore.h */,
 				40F302351B8525A9000791F8 /* LLDictionaryStore.m */,
+				40F3023B1B85E621000791F8 /* LLWordItem.h */,
+				40F3023C1B85E621000791F8 /* LLWordItem.m */,
 			);
 			name = dictionary;
 			sourceTree = "<group>";
@@ -263,6 +268,7 @@
 				40F301F51B84FFC0000791F8 /* main.m in Sources */,
 				40F3021B1B8500A7000791F8 /* AppDelegate.m in Sources */,
 				40F302361B8525A9000791F8 /* LLDictionaryStore.m in Sources */,
+				40F3023D1B85E621000791F8 /* LLWordItem.m in Sources */,
 				40F3023A1B8530C6000791F8 /* IStorage.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

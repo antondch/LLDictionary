@@ -7,12 +7,17 @@
 //
 
 #import "LLDictionaryStore.h"
+#import "LLWordItem.h"
 
 @interface LLDictionaryStore()
 @end
 
 @implementation LLDictionaryStore
 @synthesize storage = _storage;
+
+#pragma mark - conatants
+//Скользкий путь, в больших проектах такие вещи лучше объявлять глобально, во избежания дублирования, либо добавлять уникальный id модели, которая требует сохранения.
+static NSString * const DIC_FILE_NAME = @"words";
 
 #pragma mark - init section
 
@@ -29,7 +34,6 @@
     self = [super init];
     if(self){
         _privateWordList = [[NSMutableArray alloc]init];
-        _privateTransList = [[NSMutableArray alloc]init];
     }
     return  self;
 }
@@ -41,43 +45,27 @@
 
 #pragma mark - get & set words
 
--(NSArray*)allOriginalWords{
-    return _privateWordList;
-}
-
--(NSArray*)allTranslations{
-    return _privateTransList;
-}
 
 -(void)addWord:(NSString *)word withTranslation:(NSString *)translation{
-    [_privateWordList addObject:word];
-    [_privateTransList addObject:translation];
+    LLWordItem *item = [[LLWordItem alloc]init];
+    item.original = word;
+    item.translation = translation;
+    [_privateWordList addObject:item];
 }
 
 -(void)removeWord:(NSString *)word{
-    NSUInteger idx = [_privateWordList indexOfObject:word];
-    if(idx == NSNotFound){
-        idx = [_privateTransList indexOfObject:word];
-    }
-    if(idx != NSNotFound){
-        [_privateWordList removeObjectAtIndex:idx];
-        [_privateTransList removeObjectAtIndex:idx];
-    }
+//todo: реализовать удаление
 }
 
 #pragma mark - save & load
 
 -(BOOL)save{
     BOOL result = NO;
-    NSData *originals = [NSKeyedArchiver archivedDataWithRootObject:_privateWordList];
-    NSData *translations = [NSKeyedArchiver archivedDataWithRootObject:_privateTransList];
+    NSData *words = [NSKeyedArchiver archivedDataWithRootObject:_privateWordList];
     if(_storage){
-        //fixme: запилить константы на имена и проверить сохранность данных.
+        //fixme: проверить сохранность данных.
         if ([_storage respondsToSelector:@selector(saveData:withName:)]){
-            result = [_storage saveData:originals withName:@"originals"];
-            if(result){
-                result =  [_storage saveData:translations withName:@"translations"];
-            }
+            result = [_storage saveData:words withName:DIC_FILE_NAME];
         }
     }
     return result;
@@ -87,11 +75,9 @@
     BOOL result = NO;
    if ([_storage respondsToSelector:@selector(loadDataWithName:)]){
        @try{
-           NSData *originals = [_storage loadDataWithName:@"originals"];
-           NSData *translations = [_storage loadDataWithName:@"translations"];
-            _privateWordList = [NSKeyedUnarchiver unarchiveObjectWithData:originals];
-            _privateTransList = [NSKeyedUnarchiver unarchiveObjectWithData:translations];
-           if([_privateTransList count]==[_privateWordList count]){
+           NSData *words = [_storage loadDataWithName:DIC_FILE_NAME];
+            _privateWordList = [NSKeyedUnarchiver unarchiveObjectWithData:words];
+           if([_privateWordList count]){
                result = YES;
            }
        }@catch(NSException *exception){

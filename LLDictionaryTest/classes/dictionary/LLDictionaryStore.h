@@ -10,22 +10,21 @@
 #import "IStorage.h"
 
 @interface LLDictionaryStore : NSObject{
-    //array of original words
+    //array of words & translations
     NSMutableArray *_privateWordList;
-    //array of translations
-    NSMutableArray *_privateTransList;
     
     id<StorageDelegate> _storage;
+    
+
 }
 
 +(instancetype)sharedStore;
 
-@property(nonatomic, readonly) NSArray *allOriginalWords;
-@property(nonatomic, readonly) NSArray *allTranslations;
 @property(nonatomic, strong) id<StorageDelegate> storage;
 
 -(void)addWord:(NSString*)word withTranslation:(NSString*)translation;
 -(void)removeWord:(NSString*)word;
+-(NSArray*)getWordsWithMask:(NSString*)mask;
 -(BOOL)save;
 
 @end
