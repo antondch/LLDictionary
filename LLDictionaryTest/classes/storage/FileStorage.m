@@ -8,10 +8,11 @@
 
 #import "FileStorage.h"
 
-@interface FileStorage()
-
-@end
 @implementation FileStorage
+
+#pragma mark - constants
+
+static NSString * const DIR_NAME = @"Private_Documents";
 
 #pragma mark - init & get instance
 
@@ -31,7 +32,9 @@
 
 - (FileStorage *)initPrivate {
     self = [super init];
-    [self createDataPath];
+    if(self){
+        [self createDataPath];
+    }
     return self;
 }
 
@@ -85,7 +88,7 @@
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
     NSString *documentsDirectory = paths[0];
-    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:@"Private Documents"];
+    documentsDirectory = [documentsDirectory stringByAppendingPathComponent:DIR_NAME];
     
     NSError *error;
     [[NSFileManager defaultManager] createDirectoryAtPath:documentsDirectory withIntermediateDirectories:YES attributes:nil error:&error];
