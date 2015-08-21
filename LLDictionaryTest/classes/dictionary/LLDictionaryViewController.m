@@ -7,6 +7,8 @@
 //
 
 #import "LLDictionaryViewController.h"
+#import "ITranslationService.h"
+#import "LLYandexTranslationAPIService.h"
 
 @interface LLDictionaryViewController ()
 
@@ -19,7 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setupNavigationBar];
-    // Do any additional setup after loading the view from its nib.
+    [self setupTranslationService];
 }
 
 - (void)setupNavigationBar{
@@ -37,6 +39,17 @@
     self.navigationItem.leftBarButtonItem = deleteButton;
     UIBarButtonItem *searchButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(searchWord:)];
     self.navigationItem.rightBarButtonItem = searchButton;
+}
+
+-(void)setupTranslationService{
+    _translator = [[LLYandexTranslationAPIService alloc]initWithAPIKey:@"trnsl.1.1.20150820T162617Z.f1d7c06eaab938fe.f10b23322dce20bc2224b83d70072f2e99b62dbb"];
+}
+
+#pragma mark - dictionary manipulation
+-(void)searchWord:(id)sender{
+    [_translator fetchTranslate:@"hello" toLang:ru withCallBackBlock:^(NSData* data, TranslationServiceResult result) {
+        NSLog(@"result");
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

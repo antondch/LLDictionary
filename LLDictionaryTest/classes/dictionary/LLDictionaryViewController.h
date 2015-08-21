@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ITranslationService.h"
 
 @interface LLDictionaryViewController : UIViewController{
     UITextField *_searchTextField;
+    id<TranslationServiceDelegate> _translator;
+     CallBackBlock _translationCallBack;
 }
 
 @end

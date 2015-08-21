@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4008423E1B863614002939E0 /* LLYandexTranslationAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4008423D1B863614002939E0 /* LLYandexTranslationAPIService.m */; };
+		40F1CA211B876FC500260005 /* ITranslationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1CA201B876FC500260005 /* ITranslationService.m */; };
 		40F301F51B84FFC0000791F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F301F41B84FFC0000791F8 /* main.m */; };
 		40F302001B84FFC0000791F8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40F301FF1B84FFC0000791F8 /* Images.xcassets */; };
 		40F302031B84FFC0000791F8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 40F302011B84FFC0000791F8 /* LaunchScreen.xib */; };
@@ -32,6 +34,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4008423C1B863614002939E0 /* LLYandexTranslationAPIService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLYandexTranslationAPIService.h; path = services/LLYandexTranslationAPIService.h; sourceTree = "<group>"; };
+		4008423D1B863614002939E0 /* LLYandexTranslationAPIService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLYandexTranslationAPIService.m; path = services/LLYandexTranslationAPIService.m; sourceTree = "<group>"; };
+		40F1CA1F1B876FC500260005 /* ITranslationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITranslationService.h; path = services/ITranslationService.h; sourceTree = "<group>"; };
+		40F1CA201B876FC500260005 /* ITranslationService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ITranslationService.m; path = services/ITranslationService.m; sourceTree = "<group>"; };
 		40F301EF1B84FFC0000791F8 /* LLDictionaryTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LLDictionaryTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40F301F31B84FFC0000791F8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40F301F41B84FFC0000791F8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -75,6 +81,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4008423B1B8634D3002939E0 /* services */ = {
+			isa = PBXGroup;
+			children = (
+				4008423C1B863614002939E0 /* LLYandexTranslationAPIService.h */,
+				4008423D1B863614002939E0 /* LLYandexTranslationAPIService.m */,
+				40F1CA1F1B876FC500260005 /* ITranslationService.h */,
+				40F1CA201B876FC500260005 /* ITranslationService.m */,
+			);
+			name = services;
+			sourceTree = "<group>";
+		};
 		40F301E61B84FFC0000791F8 = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +151,7 @@
 		40F302181B850026000791F8 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				4008423B1B8634D3002939E0 /* services */,
 				40F302371B85307A000791F8 /* storage */,
 				40F3021C1B8500B6000791F8 /* dictionary */,
 				40F302191B8500A7000791F8 /* AppDelegate.h */,
@@ -270,10 +288,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				40F302221B850298000791F8 /* LLDictionaryViewController.m in Sources */,
+				40F1CA211B876FC500260005 /* ITranslationService.m in Sources */,
 				40F301F51B84FFC0000791F8 /* main.m in Sources */,
 				40F302401B85F319000791F8 /* FileStorage.m in Sources */,
 				40F3021B1B8500A7000791F8 /* AppDelegate.m in Sources */,
 				40F302361B8525A9000791F8 /* LLDictionaryStore.m in Sources */,
+				4008423E1B863614002939E0 /* LLYandexTranslationAPIService.m in Sources */,
 				40F3023D1B85E621000791F8 /* LLWordItem.m in Sources */,
 				40F3023A1B8530C6000791F8 /* IStorage.m in Sources */,
 			);
@@ -469,6 +489,7 @@
 				40F302141B84FFC0000791F8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		40F302151B84FFC0000791F8 /* Build configuration list for PBXNativeTarget "LLDictionaryTestTests" */ = {
 			isa = XCConfigurationList;
@@ -477,6 +498,7 @@
 				40F302171B84FFC0000791F8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
