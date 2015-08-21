@@ -11,8 +11,10 @@
 #import "ITranslationService.h"
 #import "LLYandexTranslationAPIService.h"
 #import "TranslationResponse.h"
+#import "TwoColumnTableViewCell.h"
+#import "LLWordItem.h"
 
-@interface LLDictionaryViewController ()
+@interface LLDictionaryViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *dictionaryTableView;
 
 @end
@@ -25,6 +27,8 @@
     [super viewDidLoad];
     [self setupNavigationBar];
     [self setupTranslationService];
+    self.dictionaryTableView.dataSource = self;
+    [self.dictionaryTableView registerClass:[TwoColumnTableViewCell class] forCellReuseIdentifier:@"Cell"];
 }
 
 - (void)setupNavigationBar{
@@ -55,7 +59,7 @@
         __strong LLDictionaryViewController *strongSelf = weakSelf;
         switch(result.resultCode){
             case succsess:
-                [strongSelf addWordtoDictionary:@"test" withTranslation:@"test"];
+                [strongSelf addWordtoDictionary:_searchTextField.text withTranslation:result.translation];
                 break;
             default:
                 break;
@@ -66,11 +70,33 @@
 -(void)addWordtoDictionary:(NSString*) word withTranslation:(NSString*) translation{
     LLDictionaryStore *dictionaryStore = [LLDictionaryStore sharedStore];
     [dictionaryStore addWord:word withTranslation:translation];
+    [self.dictionaryTableView reloadData];
+//    [self.dictionaryTableView beginUpdates];
+//    NSIndexPath *path = [NSIndexPath indexPathForRow:dictionaryStore.wordsCount-1 inSection:0];
+//    NSArray *indexArray = [NSArray arrayWithObjects:path, nil];
+//    [self.dictionaryTableView insertRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationNone];
+//    [self.dictionaryTableView endUpdates];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - dictionary table view delegate
+
+#pragma mark data source
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [LLDictionaryStore sharedStore].wordsCount;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSArray *items = [[LLDictionaryStore sharedStore]getWordsWithMask:@""];
+    LLWordItem *item = items[indexPath.row];
+    TwoColumnTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    cell.label1.text = [NSString stringWithFormat:@"%@", item.original];
+    cell.label2.text = [NSString stringWithFormat:@"%@", item.translation];
+    return cell;
 }
 
 @end

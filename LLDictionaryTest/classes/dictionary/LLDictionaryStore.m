@@ -45,6 +45,13 @@ static NSString * const DIC_FILE_NAME = @"words";
 
 #pragma mark - get & set words
 
+-(NSUInteger)wordsCount{
+    return [_privateWordList count];
+}
+
+-(NSArray*)getWordsWithMask:(NSString*)mask{
+    return _privateWordList;
+}
 
 -(void)addWord:(NSString *)word withTranslation:(NSString *)translation{
     LLWordItem *item = [[LLWordItem alloc]init];

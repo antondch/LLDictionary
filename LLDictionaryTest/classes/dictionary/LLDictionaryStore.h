@@ -19,10 +19,12 @@
 +(instancetype)sharedStore;
 
 @property(nonatomic, strong) id<StorageDelegate> storage;
+@property(nonatomic, readonly) NSUInteger wordsCount;
 
 -(void)addWord:(NSString*)word withTranslation:(NSString*)translation;
 -(void)removeWord:(NSString*)word;
 -(NSArray*)getWordsWithMask:(NSString*)mask;
 -(BOOL)save;
+
 
 @end
