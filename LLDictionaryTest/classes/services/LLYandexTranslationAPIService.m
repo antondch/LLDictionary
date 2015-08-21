@@ -32,12 +32,47 @@ static NSString * const APIURL = @"https://translate.yandex.net/api/v1.5/tr.json
     [request setHTTPMethod:@"POST"];
     NSString *body = [NSString stringWithFormat:@"key=%@&lang=%@&text=%@&format=%@&options=%@",_APIKey,[self langToString:toLang],original,@"plain",@"1"];
     [request setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
+    
     NSURLSessionDataTask *dataTask = [_session dataTaskWithRequest:request completionHandler:
+    //callback block
      ^(NSData *data, NSURLResponse *response, NSError *error) {
-         NSString *json = [[NSString alloc] initWithData:data
-                                                encoding:NSUTF8StringEncoding];
-         NSLog(@"%@", json);
-     }];
+         TranslationServiceResult resultCode;
+         if(error){
+             callBackBlock(nil,serverError);
+             return;
+         }
+//test***
+//         NSString *json = [[NSString alloc] initWithData:data
+//                                                encoding:NSUTF8StringEncoding];
+//*******
+         NSError *convertError = nil;
+         NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&convertError];
+         if(convertError){
+             callBackBlock(nil,otherError);
+             return;
+         }
+         NSInteger code = [[dictionary valueForKey:@"code"]integerValue];
+         switch (code){
+             case 200:
+                 resultCode = succsess;
+                 callBackBlock(data,resultCode);
+                 return;
+                 break;
+             case 403:
+             case 404:
+                 resultCode = translationLimit;
+                 break;
+             case 422:
+             case 501:
+                 resultCode = translationError;
+                 break;
+             default:
+                 resultCode = otherError;
+                 break;
+         }
+         callBackBlock(nil,resultCode);
+     }];//callback block
+    
     [dataTask resume];
 }
 
