@@ -12,6 +12,7 @@
 
 @interface LLYandexTranslationAPIService: NSObject<TranslationServiceDelegate>{
     NSURLSession *_session;
+    NSString *_APIKey;
 }
 -(void)fetchTranslate:(NSString*)original toLang:(Langs)toLang withCallBackBlock:(CallBackBlock)callBackBlock;
 @end

@@ -15,26 +15,23 @@ static NSString * const APIURL = @"https://translate.yandex.net/api/v1.5/tr.json
 -(instancetype)initWithAPIKey:(NSString*)key{
     self = [super init];
     if(self){
-        [self configSessionWithKey:key];
+        _APIKey = key;
+        [self configSession];
     }
     return self;
 }
 
--(void)configSessionWithKey:(NSString*)key{
+-(void)configSession{
     NSURLSessionConfiguration *config = [NSURLSessionConfiguration defaultSessionConfiguration];
-//    config.HTTPAdditionalHeaders = [[NSDictionary alloc] initWithObjectsAndKeys:key,@"key", nil];
     _session = [NSURLSession sessionWithConfiguration:config delegate:nil delegateQueue:nil];
     
 }
 
 -(void)fetchTranslate:(NSString *)original toLang:(Langs)toLang withCallBackBlock:(CallBackBlock)callBackBlock{
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]initWithURL:[NSURL URLWithString:APIURL]];
-    [request setHTTPMethod:@"GET"];
-    [request setValue:@"trnsl.1.1.20150820T162617Z.f1d7c06eaab938fe.f10b23322dce20bc2224b83d70072f2e99b62dbb" forHTTPHeaderField:@"key"];
-    [request setValue:original forHTTPHeaderField:@"text"];
-    [request setValue:@"1" forHTTPHeaderField:@"options"];
-    [request setValue:@"plain" forHTTPHeaderField:@"format"];
-    [request setValue:[self langToString:toLang] forHTTPHeaderField:@"lang"];
+    [request setHTTPMethod:@"POST"];
+    NSString *body = [NSString stringWithFormat:@"key=%@&lang=%@&text=%@&format=%@&options=%@",_APIKey,[self langToString:toLang],original,@"plain",@"1"];
+    [request setHTTPBody:[body dataUsingEncoding:NSUTF8StringEncoding]];
     NSURLSessionDataTask *dataTask = [_session dataTaskWithRequest:request completionHandler:
      ^(NSData *data, NSURLResponse *response, NSError *error) {
          NSString *json = [[NSString alloc] initWithData:data
