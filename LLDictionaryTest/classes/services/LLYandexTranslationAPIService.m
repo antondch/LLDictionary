@@ -7,6 +7,7 @@
 //
 
 #import "LLYandexTranslationAPIService.h"
+#import "YandexResponse.h"
 
 @implementation LLYandexTranslationAPIService
 
@@ -36,41 +37,16 @@ static NSString * const APIURL = @"https://translate.yandex.net/api/v1.5/tr.json
     NSURLSessionDataTask *dataTask = [_session dataTaskWithRequest:request completionHandler:
     //callback block
      ^(NSData *data, NSURLResponse *response, NSError *error) {
-         TranslationServiceResult resultCode;
          if(error){
-             callBackBlock(nil,serverError);
+             callBackBlock(nil);
              return;
          }
+         YandexResponse *yandexResponse = [[YandexResponse alloc]initFromData:data];
 //test***
 //         NSString *json = [[NSString alloc] initWithData:data
 //                                                encoding:NSUTF8StringEncoding];
 //*******
-         NSError *convertError = nil;
-         NSDictionary *dictionary = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&convertError];
-         if(convertError){
-             callBackBlock(nil,otherError);
-             return;
-         }
-         NSInteger code = [[dictionary valueForKey:@"code"]integerValue];
-         switch (code){
-             case 200:
-                 resultCode = succsess;
-                 callBackBlock(data,resultCode);
-                 return;
-                 break;
-             case 403:
-             case 404:
-                 resultCode = translationLimit;
-                 break;
-             case 422:
-             case 501:
-                 resultCode = translationError;
-                 break;
-             default:
-                 resultCode = otherError;
-                 break;
-         }
-         callBackBlock(nil,resultCode);
+         callBackBlock(yandexResponse);
      }];//callback block
     
     [dataTask resume];

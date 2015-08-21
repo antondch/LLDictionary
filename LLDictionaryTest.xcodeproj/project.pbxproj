@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		400005341B87A6F50034C9E7 /* YandexResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 400005331B87A6F50034C9E7 /* YandexResponse.m */; };
+		400005371B87AADA0034C9E7 /* TranslationResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 400005361B87AADA0034C9E7 /* TranslationResponse.m */; };
 		4008423E1B863614002939E0 /* LLYandexTranslationAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4008423D1B863614002939E0 /* LLYandexTranslationAPIService.m */; };
 		40F1CA211B876FC500260005 /* ITranslationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1CA201B876FC500260005 /* ITranslationService.m */; };
 		40F301F51B84FFC0000791F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F301F41B84FFC0000791F8 /* main.m */; };
@@ -34,6 +36,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		400005321B87A6F50034C9E7 /* YandexResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YandexResponse.h; path = services/YandexResponse.h; sourceTree = "<group>"; };
+		400005331B87A6F50034C9E7 /* YandexResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YandexResponse.m; path = services/YandexResponse.m; sourceTree = "<group>"; };
+		400005351B87AADA0034C9E7 /* TranslationResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TranslationResponse.h; path = services/TranslationResponse.h; sourceTree = "<group>"; };
+		400005361B87AADA0034C9E7 /* TranslationResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TranslationResponse.m; path = services/TranslationResponse.m; sourceTree = "<group>"; };
 		4008423C1B863614002939E0 /* LLYandexTranslationAPIService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLYandexTranslationAPIService.h; path = services/LLYandexTranslationAPIService.h; sourceTree = "<group>"; };
 		4008423D1B863614002939E0 /* LLYandexTranslationAPIService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLYandexTranslationAPIService.m; path = services/LLYandexTranslationAPIService.m; sourceTree = "<group>"; };
 		40F1CA1F1B876FC500260005 /* ITranslationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITranslationService.h; path = services/ITranslationService.h; sourceTree = "<group>"; };
@@ -88,6 +94,10 @@
 				4008423D1B863614002939E0 /* LLYandexTranslationAPIService.m */,
 				40F1CA1F1B876FC500260005 /* ITranslationService.h */,
 				40F1CA201B876FC500260005 /* ITranslationService.m */,
+				400005321B87A6F50034C9E7 /* YandexResponse.h */,
+				400005331B87A6F50034C9E7 /* YandexResponse.m */,
+				400005351B87AADA0034C9E7 /* TranslationResponse.h */,
+				400005361B87AADA0034C9E7 /* TranslationResponse.m */,
 			);
 			name = services;
 			sourceTree = "<group>";
@@ -288,9 +298,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				40F302221B850298000791F8 /* LLDictionaryViewController.m in Sources */,
+				400005341B87A6F50034C9E7 /* YandexResponse.m in Sources */,
 				40F1CA211B876FC500260005 /* ITranslationService.m in Sources */,
 				40F301F51B84FFC0000791F8 /* main.m in Sources */,
 				40F302401B85F319000791F8 /* FileStorage.m in Sources */,
+				400005371B87AADA0034C9E7 /* TranslationResponse.m in Sources */,
 				40F3021B1B8500A7000791F8 /* AppDelegate.m in Sources */,
 				40F302361B8525A9000791F8 /* LLDictionaryStore.m in Sources */,
 				4008423E1B863614002939E0 /* LLYandexTranslationAPIService.m in Sources */,

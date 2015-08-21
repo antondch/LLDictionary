@@ -7,10 +7,13 @@
 //
 
 #import "LLDictionaryViewController.h"
+#import "LLDictionaryStore.h"
 #import "ITranslationService.h"
 #import "LLYandexTranslationAPIService.h"
+#import "TranslationResponse.h"
 
 @interface LLDictionaryViewController ()
+@property (weak, nonatomic) IBOutlet UITableView *dictionaryTableView;
 
 @end
 
@@ -47,9 +50,22 @@
 
 #pragma mark - dictionary manipulation
 -(void)searchWord:(id)sender{
-    [_translator fetchTranslate:@"hello" toLang:ru withCallBackBlock:^(NSData* data, TranslationServiceResult result) {
-        NSLog(@"result");
+    __weak LLDictionaryViewController *weakSelf = self;
+    [_translator fetchTranslate:_searchTextField.text toLang:ru withCallBackBlock:^(TranslationResponse *result) {
+        __strong LLDictionaryViewController *strongSelf = weakSelf;
+        switch(result.resultCode){
+            case succsess:
+                [strongSelf addWordtoDictionary:@"test" withTranslation:@"test"];
+                break;
+            default:
+                break;
+        }
     }];
+}
+
+-(void)addWordtoDictionary:(NSString*) word withTranslation:(NSString*) translation{
+    LLDictionaryStore *dictionaryStore = [LLDictionaryStore sharedStore];
+    [dictionaryStore addWord:word withTranslation:translation];
 }
 
 - (void)didReceiveMemoryWarning {

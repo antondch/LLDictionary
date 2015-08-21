@@ -7,9 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+@class TranslationResponse;
+
 typedef enum{
     ru,
-    en
+    en,
+    uncnown
 }Langs;
 
 typedef enum{
@@ -17,13 +20,13 @@ typedef enum{
     translationLimit,
     translationError,
     serverError,
+    parseError,
     otherError
 }TranslationServiceResult;
 
-typedef void (^ CallBackBlock)(NSData*,TranslationServiceResult);
+typedef void (^ CallBackBlock)(TranslationResponse*);
 
 @protocol TranslationServiceDelegate <NSObject>
-
 @optional
 -(instancetype)initWithAPIKey:(NSString*)key;
 
@@ -31,4 +34,5 @@ typedef void (^ CallBackBlock)(NSData*,TranslationServiceResult);
 -(NSString*)langToString:(Langs)lang;
 -(void)fetchTranslate:(NSString*)original toLang:(Langs)toLang withCallBackBlock:(CallBackBlock)callBackBlock;
 @end
+
 
