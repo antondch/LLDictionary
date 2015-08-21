@@ -58,9 +58,12 @@
     [_translator fetchTranslate:_searchTextField.text toLang:ru withCallBackBlock:^(TranslationResponse *result) {
         __strong LLDictionaryViewController *strongSelf = weakSelf;
         switch(result.resultCode){
-            case succsess:
-                [strongSelf addWordtoDictionary:_searchTextField.text withTranslation:result.translation];
+            case succsess:{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [strongSelf addWordtoDictionary:_searchTextField.text withTranslation:result.translation];
+                });
                 break;
+            }
             default:
                 break;
         }
@@ -70,12 +73,14 @@
 -(void)addWordtoDictionary:(NSString*) word withTranslation:(NSString*) translation{
     LLDictionaryStore *dictionaryStore = [LLDictionaryStore sharedStore];
     [dictionaryStore addWord:word withTranslation:translation];
-    [self.dictionaryTableView reloadData];
-//    [self.dictionaryTableView beginUpdates];
-//    NSIndexPath *path = [NSIndexPath indexPathForRow:dictionaryStore.wordsCount-1 inSection:0];
-//    NSArray *indexArray = [NSArray arrayWithObjects:path, nil];
-//    [self.dictionaryTableView insertRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationNone];
-//    [self.dictionaryTableView endUpdates];
+    NSLog(@"data received");
+ 
+    [self.dictionaryTableView beginUpdates];
+    NSIndexPath *path = [NSIndexPath indexPathForRow:dictionaryStore.wordsCount-1 inSection:0];
+    NSArray *indexArray = [NSArray arrayWithObjects:path, nil];
+    [self.dictionaryTableView insertRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationFade];
+    [self.dictionaryTableView endUpdates];
+//       [self.dictionaryTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -91,6 +96,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"tableview updated");
     NSArray *items = [[LLDictionaryStore sharedStore]getWordsWithMask:@""];
     LLWordItem *item = items[indexPath.row];
     TwoColumnTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
