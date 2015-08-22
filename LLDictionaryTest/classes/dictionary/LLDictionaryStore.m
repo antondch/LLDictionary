@@ -121,6 +121,7 @@ static NSString * const DIC_FILE_NAME = @"words";
            NSData *words = [_storage loadDataWithName:DIC_FILE_NAME];
             _privateWordList = [NSKeyedUnarchiver unarchiveObjectWithData:words];
            if([_privateWordList count]){
+               [self setFilterMask:nil];
                result = YES;
            }
        }@catch(NSException *exception){

@@ -29,6 +29,7 @@
 -(void)addWord:(NSString*)word withTranslation:(NSString*)translation;
 -(void)removeWord:(NSString*)word;
 -(void)setFilterMask:(NSString*)mask;
+-(BOOL)load;
 -(BOOL)save;
 
 

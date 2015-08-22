@@ -14,6 +14,7 @@
 #import "LLTwoColumnTableViewCell.h"
 #import "LLWordItem.h"
 #import "LLReachability.h"
+#import "FileStorage.h"
 
 @interface LLDictionaryViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *dictionaryTableView;
@@ -26,14 +27,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self initDictionary];
     [self setupViewComponens];
     [self setupTranslationService];
+    [self handleAPPLifeCicle];
     [self checkInternet];
 }
 
 - (void)setupViewComponens{
     self.dictionaryTableView.dataSource = self;
     [self.dictionaryTableView registerClass:[LLTwoColumnTableViewCell class] forCellReuseIdentifier:@"Cell"];
+    [self.dictionaryTableView reloadData];
 
     //search text field
     _searchTextField = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, 1000, 21.0)];
@@ -58,6 +62,7 @@
 -(void)searchWord:(id)sender{
     LLWordItem *item = [[LLDictionaryStore sharedStore]getItemWithWord:_searchTextField.text];
     if(item){
+        [self showAlertWithTitle:NSLocalizedString(@"wordIsExitsTitle", @"word already exits alert title") andText:NSLocalizedString(@"wordIsExitsText", @"word already exits alert text")];
         return;
     }
     if(!_isInternetAvailable){
@@ -95,9 +100,9 @@
     [self.dictionaryTableView endUpdates];
 }
 
-#pragma mark - dictionary table view delegate
 
-#pragma mark tableView data source
+#pragma mark - tableView data source
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [[[LLDictionaryStore sharedStore]filteredWords] count];
 }
@@ -137,6 +142,23 @@
                                                cancelButtonTitle:@"OK"
                                                otherButtonTitles:nil];
     [alert show];
+}
+
+#pragma mark - handle app status
+
+-(void)handleAPPLifeCicle{
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appWillResignActive:) name:UIApplicationWillResignActiveNotification object:nil];
+}
+
+-(void)appWillResignActive:(NSNotification*)notification{
+    [[LLDictionaryStore sharedStore]save];
+}
+
+#pragma mark - init model
+-(void)initDictionary{
+    [LLDictionaryStore sharedStore].storage = [FileStorage defaultStorage];
+    [[LLDictionaryStore sharedStore]load];
 }
 
 @end
