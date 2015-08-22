@@ -11,7 +11,6 @@
 		400005371B87AADA0034C9E7 /* LLTranslationResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 400005361B87AADA0034C9E7 /* LLTranslationResponse.m */; };
 		4000053A1B87B9DE0034C9E7 /* LLTwoColumnTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 400005391B87B9DE0034C9E7 /* LLTwoColumnTableViewCell.m */; };
 		4000053E1B87F75A0034C9E7 /* LLReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4000053D1B87F75A0034C9E7 /* LLReachability.m */; };
-		400005431B8816A10034C9E7 /* LLTableHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 400005421B8816A10034C9E7 /* LLTableHeaderView.m */; };
 		4008423E1B863614002939E0 /* LLYandexTranslationAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4008423D1B863614002939E0 /* LLYandexTranslationAPIService.m */; };
 		40F1CA211B876FC500260005 /* ITranslationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1CA201B876FC500260005 /* ITranslationService.m */; };
 		40F301F51B84FFC0000791F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F301F41B84FFC0000791F8 /* main.m */; };
@@ -47,8 +46,6 @@
 		400005391B87B9DE0034C9E7 /* LLTwoColumnTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLTwoColumnTableViewCell.m; path = dictionary/LLTwoColumnTableViewCell.m; sourceTree = "<group>"; };
 		4000053C1B87F75A0034C9E7 /* LLReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LLReachability.h; sourceTree = "<group>"; };
 		4000053D1B87F75A0034C9E7 /* LLReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LLReachability.m; sourceTree = "<group>"; };
-		400005411B8816A10034C9E7 /* LLTableHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLTableHeaderView.h; path = dictionary/LLTableHeaderView.h; sourceTree = "<group>"; };
-		400005421B8816A10034C9E7 /* LLTableHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLTableHeaderView.m; path = dictionary/LLTableHeaderView.m; sourceTree = "<group>"; };
 		4008423C1B863614002939E0 /* LLYandexTranslationAPIService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLYandexTranslationAPIService.h; path = services/LLYandexTranslationAPIService.h; sourceTree = "<group>"; };
 		4008423D1B863614002939E0 /* LLYandexTranslationAPIService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLYandexTranslationAPIService.m; path = services/LLYandexTranslationAPIService.m; sourceTree = "<group>"; };
 		40F1CA1F1B876FC500260005 /* ITranslationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITranslationService.h; path = services/ITranslationService.h; sourceTree = "<group>"; };
@@ -193,8 +190,6 @@
 			isa = PBXGroup;
 			children = (
 				400005381B87B9DE0034C9E7 /* LLTwoColumnTableViewCell.h */,
-				400005411B8816A10034C9E7 /* LLTableHeaderView.h */,
-				400005421B8816A10034C9E7 /* LLTableHeaderView.m */,
 				400005391B87B9DE0034C9E7 /* LLTwoColumnTableViewCell.m */,
 				40F3021F1B850298000791F8 /* LLDictionaryViewController.h */,
 				40F302201B850298000791F8 /* LLDictionaryViewController.m */,
@@ -322,7 +317,6 @@
 			files = (
 				4000053E1B87F75A0034C9E7 /* LLReachability.m in Sources */,
 				40F302221B850298000791F8 /* LLDictionaryViewController.m in Sources */,
-				400005431B8816A10034C9E7 /* LLTableHeaderView.m in Sources */,
 				400005341B87A6F50034C9E7 /* LLYandexResponse.m in Sources */,
 				40F1CA211B876FC500260005 /* ITranslationService.m in Sources */,
 				40F301F51B84FFC0000791F8 /* main.m in Sources */,

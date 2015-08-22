@@ -15,6 +15,7 @@
 - (UILabel *)label {
     UILabel *label = [[UILabel alloc] init];
     label.translatesAutoresizingMaskIntoConstraints = NO;
+    label.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:label];
     return label;
 }

@@ -56,13 +56,23 @@ static NSString * const DIC_FILE_NAME = @"words";
 
 -(void)setFilterMask:(NSString*)mask{
     if(!mask||[mask isEqualToString:@""]){
-        
-        _filteredWordList=_privateWordList;
+        _filteredWordList = [_privateWordList sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+            
+            LLWordItem *item1 = (LLWordItem*)obj1;
+            LLWordItem *item2 = (LLWordItem*)obj2;
+            return [[item1.original lowercaseString] compare:[item2.original lowercaseString]];
+        }];
         return;
     }
     
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.original contains[c] %@ or SELF.translation contains[c] %@", mask, mask];
-    _filteredWordList = [_privateWordList filteredArrayUsingPredicate:predicate];
+    NSArray *unSorted = [_privateWordList filteredArrayUsingPredicate:predicate];
+    _filteredWordList = [unSorted sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        
+        LLWordItem *item1 = (LLWordItem*)obj1;
+        LLWordItem *item2 = (LLWordItem*)obj2;
+        return [[item1.original lowercaseString] compare:[item2.original lowercaseString]];
+    }];
 }
 
 -(LLWordItem*)getItemWithWord:(NSString*)word{

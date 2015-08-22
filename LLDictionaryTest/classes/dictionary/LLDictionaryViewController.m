@@ -31,8 +31,7 @@
 
 - (void)setupViewComponens{
     self.dictionaryTableView.dataSource = self;
-    self.dictionaryTableView setTableHeaderView:<#(UIView *)#>
-    [self.dictionaryTableView registerClass:[TwoColumnTableViewCell class] forCellReuseIdentifier:@"Cell"];
+    [self.dictionaryTableView registerClass:[LLTwoColumnTableViewCell class] forCellReuseIdentifier:@"Cell"];
 
     //search text field
     _searchTextField = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, 1000, 21.0)];
