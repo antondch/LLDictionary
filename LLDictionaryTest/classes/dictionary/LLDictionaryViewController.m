@@ -13,6 +13,7 @@
 #import "LLTranslationResponse.h"
 #import "LLTwoColumnTableViewCell.h"
 #import "LLWordItem.h"
+#import "LLReachability.h"
 
 @interface LLDictionaryViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *dictionaryTableView;
@@ -27,6 +28,7 @@
     [super viewDidLoad];
     [self setupViewComponens];
     [self setupTranslationService];
+    [self checkInternet];
 }
 
 - (void)setupViewComponens{
@@ -35,10 +37,6 @@
 
     //search text field
     _searchTextField = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, 1000, 21.0)];
-//    _searchTextField.borderStyle = UITextBorderStyleNone;
-//    _searchTextField.backgroundColor = [UIColor colorWithRed:0.2 green:0.9 blue:0.5 alpha:0.3];
-//    _searchTextField.textAlignment = NSTextAlignmentCenter;
-//    _searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     _searchTextField.text = NSLocalizedString(@"SearchWordTextField", @"Default text for search field.");
     _searchTextField.delegate = self;
     
@@ -58,7 +56,13 @@
 
 #pragma mark - dictionary manipulation
 -(void)searchWord:(id)sender{
-    
+    LLWordItem *item = [[LLDictionaryStore sharedStore]getItemWithWord:_searchTextField.text];
+    if(item){
+        return;
+    }
+    if(!_isInternetAvailable){
+        return;
+    }
     __weak LLDictionaryViewController *weakSelf = self;
     [_translator fetchTranslate:_searchTextField.text toLang:ru withCallBackBlock:^(LLTranslationResponse *result) {
         __strong LLDictionaryViewController *strongSelf = weakSelf;
@@ -85,12 +89,6 @@
     NSArray *indexArray = [NSArray arrayWithObjects:path, nil];
     [self.dictionaryTableView insertRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationFade];
     [self.dictionaryTableView endUpdates];
-//       [self.dictionaryTableView reloadData];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - dictionary table view delegate
@@ -117,12 +115,15 @@
     [self.dictionaryTableView reloadData];
 }
 
-//-(BOOL)searchDisplayController:(UISearchController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
-//    // Tells the table data source to reload when scope bar selection changes
-//    [self filterContentForSearchText:self.searchDisplayController.searchBar.text scope:
-//     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:searchOption]];
-//    // Return YES to cause the search result table view to be reloaded.
-//    return YES;
-//}
+#pragma mark - handle internet status
+
+- (void)checkInternet{
+    _isInternetAvailable = [LLReachability defaultReachability].reachabilityForInternetConnection;
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(internetStatusChanged) name:REACHABILITI_CHANGED object:nil];
+}
+
+- (void)internetStatusChanged{
+   _isInternetAvailable = [LLReachability defaultReachability].reachabilityForInternetConnection;
+}
 
 @end

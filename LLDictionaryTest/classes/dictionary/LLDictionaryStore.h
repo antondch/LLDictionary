@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "IStorage.h"
+@class LLWordItem;
 
 @interface LLDictionaryStore : NSObject{
     //array of LLWordItem
@@ -24,6 +25,7 @@
 @property(nonatomic, readonly) NSArray* filteredWords;
 @property(nonatomic, readonly) NSArray* allWords;
 
+-(LLWordItem*)getItemWithWord:(NSString*)word;
 -(void)addWord:(NSString*)word withTranslation:(NSString*)translation;
 -(void)removeWord:(NSString*)word;
 -(void)setFilterMask:(NSString*)mask;

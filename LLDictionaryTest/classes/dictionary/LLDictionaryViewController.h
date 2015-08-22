@@ -13,6 +13,7 @@
     UISearchBar *_searchTextField;
     id<TranslationServiceDelegate> _translator;
      CallBackBlock _translationCallBack;
+    BOOL _isInternetAvailable;
 }
 
 @end
