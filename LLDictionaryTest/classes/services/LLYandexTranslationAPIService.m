@@ -7,7 +7,7 @@
 //
 
 #import "LLYandexTranslationAPIService.h"
-#import "YandexResponse.h"
+#import "LLYandexResponse.h"
 
 @implementation LLYandexTranslationAPIService
 
@@ -41,7 +41,7 @@ static NSString * const APIURL = @"https://translate.yandex.net/api/v1.5/tr.json
              callBackBlock(nil);
              return;
          }
-         YandexResponse *yandexResponse = [[YandexResponse alloc]initFromData:data];
+         LLYandexResponse *yandexResponse = [[LLYandexResponse alloc]initFromData:data];
 //test***
 //         NSString *json = [[NSString alloc] initWithData:data
 //                                                encoding:NSUTF8StringEncoding];

@@ -6,9 +6,9 @@
 //  Copyright (c) 2015 DCH. All rights reserved.
 //
 
-#import "TranslationResponse.h"
+#import "LLTranslationResponse.h"
 
-@implementation TranslationResponse
+@implementation LLTranslationResponse
 -(instancetype)initFromData:(NSData*)data{
     //todo: make an abstract method.
     self = [super init];

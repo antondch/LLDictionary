@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 DCH. All rights reserved.
 //
 
-#import "YandexResponse.h"
+#import "LLYandexResponse.h"
 #import "ITranslationService.h"
 
-@implementation YandexResponse
+@implementation LLYandexResponse
 -(instancetype)initFromData:(NSData *)data{
     self = [super initFromData:data];
     if(self){

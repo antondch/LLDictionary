@@ -6,12 +6,12 @@
 //  Copyright (c) 2015 DCH. All rights reserved.
 //
 
-#import "TwoColumnTableViewCell.h"
-@interface TwoColumnTableViewCell()
+#import "LLTwoColumnTableViewCell.h"
+@interface LLTwoColumnTableViewCell()
 @property (strong, nonatomic) UIView *divider;
 @end
 
-@implementation TwoColumnTableViewCell
+@implementation LLTwoColumnTableViewCell
 - (UILabel *)label {
     UILabel *label = [[UILabel alloc] init];
     label.translatesAutoresizingMaskIntoConstraints = NO;

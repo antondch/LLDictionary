@@ -13,13 +13,13 @@
 extern NSString *const REACHABILITI_CHANGED;
 
 
-@interface Reachability : NSObject{
+@interface LLReachability : NSObject{
     SCNetworkReachabilityRef _reachabilityRef;
 }
 
 @property (nonatomic, readonly) BOOL reachabilityForInternetConnection;
 
-+(Reachability *)defaultReachability;
++(LLReachability *)defaultReachability;
 
 - (BOOL)startNotifier;
 - (void)stopNotifier;

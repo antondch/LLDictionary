@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 DCH. All rights reserved.
 //
 
-#import "Reachability.h"
+#import "LLReachability.h"
 
 
 NSString *const REACHABILITI_CHANGED = @"kNetworkReachabilityChangedNotification";
@@ -15,22 +15,22 @@ NSString *const REACHABILITI_CHANGED = @"kNetworkReachabilityChangedNotification
 static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReachabilityFlags flags, void *info) {
 #pragma unused (target, flags)
     NSCAssert(info != NULL, @"info was NULL in ReachabilityCallback");
-    NSCAssert([(__bridge NSObject *) info isKindOfClass:[Reachability class]], @"info was wrong class in ReachabilityCallback");
+    NSCAssert([(__bridge NSObject *) info isKindOfClass:[LLReachability class]], @"info was wrong class in ReachabilityCallback");
 
-    Reachability *noteObject = (__bridge Reachability *) info;
+    LLReachability *noteObject = (__bridge LLReachability *) info;
     // Post a notification to notify the client that the network reachability changed.
     [[NSNotificationCenter defaultCenter] postNotificationName:REACHABILITI_CHANGED object:noteObject];
 }
 
 
-@implementation Reachability
+@implementation LLReachability
 - (id)init {
     @throw [[NSException alloc] initWithName:@"Error: it's a singleton! " reason:@"Use +[Reachability defaultReachability]" userInfo:nil];
     return nil;
 }
 
-+ (Reachability *)defaultReachability {
-    static Reachability *reachability = nil;
++ (LLReachability *)defaultReachability {
+    static LLReachability *reachability = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         reachability = [[self alloc] initPrivate];
@@ -38,7 +38,7 @@ static void ReachabilityCallback(SCNetworkReachabilityRef target, SCNetworkReach
     return reachability;
 }
 
-- (Reachability *)initPrivate {
+- (LLReachability *)initPrivate {
     self = [super init];
     if (self) {
         _reachabilityRef = SCNetworkReachabilityCreateWithName(NULL, "apple.com");

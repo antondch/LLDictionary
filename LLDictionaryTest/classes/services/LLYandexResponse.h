@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "ITranslationService.h"
-#import "TranslationResponse.h"
+#import "LLTranslationResponse.h"
 
-@interface YandexResponse : TranslationResponse
+@interface LLYandexResponse : LLTranslationResponse
 -(instancetype)initFromData:(NSData *)data;
 @end

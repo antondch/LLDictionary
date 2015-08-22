@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class TranslationResponse;
+@class LLTranslationResponse;
 
 typedef enum{
     ru,
@@ -24,7 +24,7 @@ typedef enum{
     otherError
 }TranslationServiceResult;
 
-typedef void (^ CallBackBlock)(TranslationResponse*);
+typedef void (^ CallBackBlock)(LLTranslationResponse*);
 
 @protocol TranslationServiceDelegate <NSObject>
 @optional

@@ -10,8 +10,8 @@
 #import "LLDictionaryStore.h"
 #import "ITranslationService.h"
 #import "LLYandexTranslationAPIService.h"
-#import "TranslationResponse.h"
-#import "TwoColumnTableViewCell.h"
+#import "LLTranslationResponse.h"
+#import "LLTwoColumnTableViewCell.h"
 #import "LLWordItem.h"
 
 @interface LLDictionaryViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
@@ -31,7 +31,9 @@
 
 - (void)setupViewComponens{
     self.dictionaryTableView.dataSource = self;
+    self.dictionaryTableView setTableHeaderView:<#(UIView *)#>
     [self.dictionaryTableView registerClass:[TwoColumnTableViewCell class] forCellReuseIdentifier:@"Cell"];
+
     //search text field
     _searchTextField = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, 1000, 21.0)];
 //    _searchTextField.borderStyle = UITextBorderStyleNone;
@@ -59,7 +61,7 @@
 -(void)searchWord:(id)sender{
     
     __weak LLDictionaryViewController *weakSelf = self;
-    [_translator fetchTranslate:_searchTextField.text toLang:ru withCallBackBlock:^(TranslationResponse *result) {
+    [_translator fetchTranslate:_searchTextField.text toLang:ru withCallBackBlock:^(LLTranslationResponse *result) {
         __strong LLDictionaryViewController *strongSelf = weakSelf;
         switch(result.resultCode){
             case succsess:{
@@ -103,7 +105,7 @@
     NSLog(@"tableview updated");
     NSArray *items = [[LLDictionaryStore sharedStore]filteredWords];
     LLWordItem *item = items[indexPath.row];
-    TwoColumnTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    LLTwoColumnTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     cell.label1.text = [NSString stringWithFormat:@"%@", item.original];
     cell.label2.text = [NSString stringWithFormat:@"%@", item.translation];
     return cell;

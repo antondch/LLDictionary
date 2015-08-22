@@ -10,7 +10,7 @@
 #import "ITranslationService.h"
 
 
-@interface TranslationResponse : NSObject
+@interface LLTranslationResponse : NSObject
 @property (nonatomic, copy) NSString *translation;
 @property (nonatomic) Langs fromLang;
 @property (nonatomic) TranslationServiceResult resultCode;

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
-@interface TwoColumnTableViewCell : UITableViewCell
+@interface LLTwoColumnTableViewCell : UITableViewCell
 @property (strong, nonatomic) UILabel *label1;
 @property (strong, nonatomic) UILabel *label2;
 @end
