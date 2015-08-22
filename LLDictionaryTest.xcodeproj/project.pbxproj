@@ -10,6 +10,7 @@
 		400005341B87A6F50034C9E7 /* YandexResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 400005331B87A6F50034C9E7 /* YandexResponse.m */; };
 		400005371B87AADA0034C9E7 /* TranslationResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 400005361B87AADA0034C9E7 /* TranslationResponse.m */; };
 		4000053A1B87B9DE0034C9E7 /* TwoColumnTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 400005391B87B9DE0034C9E7 /* TwoColumnTableViewCell.m */; };
+		4000053E1B87F75A0034C9E7 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 4000053D1B87F75A0034C9E7 /* Reachability.m */; };
 		4008423E1B863614002939E0 /* LLYandexTranslationAPIService.m in Sources */ = {isa = PBXBuildFile; fileRef = 4008423D1B863614002939E0 /* LLYandexTranslationAPIService.m */; };
 		40F1CA211B876FC500260005 /* ITranslationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F1CA201B876FC500260005 /* ITranslationService.m */; };
 		40F301F51B84FFC0000791F8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 40F301F41B84FFC0000791F8 /* main.m */; };
@@ -43,6 +44,8 @@
 		400005361B87AADA0034C9E7 /* TranslationResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TranslationResponse.m; path = services/TranslationResponse.m; sourceTree = "<group>"; };
 		400005381B87B9DE0034C9E7 /* TwoColumnTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TwoColumnTableViewCell.h; path = dictionary/TwoColumnTableViewCell.h; sourceTree = "<group>"; };
 		400005391B87B9DE0034C9E7 /* TwoColumnTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TwoColumnTableViewCell.m; path = dictionary/TwoColumnTableViewCell.m; sourceTree = "<group>"; };
+		4000053C1B87F75A0034C9E7 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		4000053D1B87F75A0034C9E7 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		4008423C1B863614002939E0 /* LLYandexTranslationAPIService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LLYandexTranslationAPIService.h; path = services/LLYandexTranslationAPIService.h; sourceTree = "<group>"; };
 		4008423D1B863614002939E0 /* LLYandexTranslationAPIService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LLYandexTranslationAPIService.m; path = services/LLYandexTranslationAPIService.m; sourceTree = "<group>"; };
 		40F1CA1F1B876FC500260005 /* ITranslationService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ITranslationService.h; path = services/ITranslationService.h; sourceTree = "<group>"; };
@@ -90,6 +93,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4000053B1B87F7030034C9E7 /* checkers */ = {
+			isa = PBXGroup;
+			children = (
+				4000053C1B87F75A0034C9E7 /* Reachability.h */,
+				4000053D1B87F75A0034C9E7 /* Reachability.m */,
+			);
+			path = checkers;
+			sourceTree = "<group>";
+		};
 		4008423B1B8634D3002939E0 /* services */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +176,7 @@
 		40F302181B850026000791F8 /* classes */ = {
 			isa = PBXGroup;
 			children = (
+				4000053B1B87F7030034C9E7 /* checkers */,
 				4008423B1B8634D3002939E0 /* services */,
 				40F302371B85307A000791F8 /* storage */,
 				40F3021C1B8500B6000791F8 /* dictionary */,
@@ -302,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4000053E1B87F75A0034C9E7 /* Reachability.m in Sources */,
 				40F302221B850298000791F8 /* LLDictionaryViewController.m in Sources */,
 				400005341B87A6F50034C9E7 /* YandexResponse.m in Sources */,
 				40F1CA211B876FC500260005 /* ITranslationService.m in Sources */,
