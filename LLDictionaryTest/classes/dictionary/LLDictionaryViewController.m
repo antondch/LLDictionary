@@ -41,7 +41,7 @@
 
     //search text field
     _searchTextField = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, 1000, 21.0)];
-    _searchTextField.text = NSLocalizedString(@"SearchWordTextField", @"Default text for search field.");
+//    _searchTextField.text = NSLocalizedString(@"SearchWordTextField", @"Default text for search field.");
     _searchTextField.delegate = self;
     
     self.navigationItem.titleView = _searchTextField;
@@ -63,6 +63,9 @@
     LLWordItem *item = [[LLDictionaryStore sharedStore]getItemWithWord:_searchTextField.text];
     if(item){
         [self showAlertWithTitle:NSLocalizedString(@"wordIsExitsTitle", @"word already exits alert title") andText:NSLocalizedString(@"wordIsExitsText", @"word already exits alert text")];
+        return;
+    }
+    if([_searchTextField.text isEqualToString:@""]){
         return;
     }
     if(!_isInternetAvailable){
@@ -100,6 +103,20 @@
     [self.dictionaryTableView endUpdates];
 }
 
+-(void)removeWord:(id)sender{
+    NSIndexPath *indexpath = [self.dictionaryTableView indexPathForSelectedRow];
+    if(!indexpath){
+        return;
+    }
+    LLDictionaryStore *dictionaryStore = [LLDictionaryStore sharedStore];
+    LLWordItem *item = dictionaryStore.filteredWords[indexpath.row];
+    NSArray *indexArray = [NSArray arrayWithObjects:indexpath, nil];
+    [dictionaryStore removeWordItem:item];
+    [dictionaryStore setFilterMask:_searchTextField.text];
+    [self.dictionaryTableView beginUpdates];
+    [self.dictionaryTableView deleteRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationFade];
+    [self.dictionaryTableView endUpdates];
+}
 
 #pragma mark - tableView data source
 
@@ -117,11 +134,16 @@
     return cell;
 }
 
-
 #pragma mark - UISearchBar delegate
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
     [[LLDictionaryStore sharedStore]setFilterMask:searchText];
     [self.dictionaryTableView reloadData];
+}
+
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
+{
+    [searchBar resignFirstResponder];
+    [self searchWord:nil];
 }
 
 #pragma mark - handle internet status

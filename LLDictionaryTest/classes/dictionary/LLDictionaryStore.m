@@ -94,8 +94,8 @@ static NSString * const DIC_FILE_NAME = @"words";
     [_privateWordList addObject:item];
 }
 
--(void)removeWord:(NSString *)word{
-//todo: реализовать удаление
+-(void)removeWordItem:(LLWordItem *)item{
+    [_privateWordList removeObject:item];
 }
 
 #pragma mark - save & load

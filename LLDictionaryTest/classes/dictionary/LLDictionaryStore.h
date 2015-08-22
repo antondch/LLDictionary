@@ -27,7 +27,7 @@
 
 -(LLWordItem*)getItemWithWord:(NSString*)word;
 -(void)addWord:(NSString*)word withTranslation:(NSString*)translation;
--(void)removeWord:(NSString*)word;
+-(void)removeWordItem:(LLWordItem*)item;
 -(void)setFilterMask:(NSString*)mask;
 -(BOOL)load;
 -(BOOL)save;
