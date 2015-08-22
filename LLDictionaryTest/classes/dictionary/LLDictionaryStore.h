@@ -12,6 +12,7 @@
 @interface LLDictionaryStore : NSObject{
     //array of LLWordItem
     NSMutableArray *_privateWordList;
+    NSArray *_filteredWordList;
     
     id<StorageDelegate> _storage;
 }
@@ -19,11 +20,13 @@
 +(instancetype)sharedStore;
 
 @property(nonatomic, strong) id<StorageDelegate> storage;
-@property(nonatomic, readonly) NSUInteger wordsCount;
+
+@property(nonatomic, readonly) NSArray* filteredWords;
+@property(nonatomic, readonly) NSArray* allWords;
 
 -(void)addWord:(NSString*)word withTranslation:(NSString*)translation;
 -(void)removeWord:(NSString*)word;
--(NSArray*)getWordsWithMask:(NSString*)mask;
+-(void)setFilterMask:(NSString*)mask;
 -(BOOL)save;
 
 

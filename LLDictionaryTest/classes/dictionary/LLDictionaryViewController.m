@@ -14,7 +14,7 @@
 #import "TwoColumnTableViewCell.h"
 #import "LLWordItem.h"
 
-@interface LLDictionaryViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface LLDictionaryViewController ()<UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *dictionaryTableView;
 
 @end
@@ -25,21 +25,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setupNavigationBar];
+    [self setupViewComponens];
     [self setupTranslationService];
-    self.dictionaryTableView.dataSource = self;
-    [self.dictionaryTableView registerClass:[TwoColumnTableViewCell class] forCellReuseIdentifier:@"Cell"];
 }
 
-- (void)setupNavigationBar{
+- (void)setupViewComponens{
+    self.dictionaryTableView.dataSource = self;
+    [self.dictionaryTableView registerClass:[TwoColumnTableViewCell class] forCellReuseIdentifier:@"Cell"];
     //search text field
-    _searchTextField = [[UITextField alloc]initWithFrame:CGRectMake(0, 0, 1000, 21.0)];
-    _searchTextField.borderStyle = UITextBorderStyleNone;
-    _searchTextField.backgroundColor = [UIColor colorWithRed:0.2 green:0.9 blue:0.5 alpha:0.3];
-    _searchTextField.textAlignment = NSTextAlignmentCenter;
-    _searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
+    _searchTextField = [[UISearchBar alloc]initWithFrame:CGRectMake(0, 0, 1000, 21.0)];
+//    _searchTextField.borderStyle = UITextBorderStyleNone;
+//    _searchTextField.backgroundColor = [UIColor colorWithRed:0.2 green:0.9 blue:0.5 alpha:0.3];
+//    _searchTextField.textAlignment = NSTextAlignmentCenter;
+//    _searchTextField.clearButtonMode = UITextFieldViewModeWhileEditing;
     _searchTextField.text = NSLocalizedString(@"SearchWordTextField", @"Default text for search field.");
+    _searchTextField.delegate = self;
+    
     self.navigationItem.titleView = _searchTextField;
+    
 
     //control buttons
     UIBarButtonItem *deleteButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemTrash target:self action:@selector(removeWord:)];
@@ -54,6 +57,7 @@
 
 #pragma mark - dictionary manipulation
 -(void)searchWord:(id)sender{
+    
     __weak LLDictionaryViewController *weakSelf = self;
     [_translator fetchTranslate:_searchTextField.text toLang:ru withCallBackBlock:^(TranslationResponse *result) {
         __strong LLDictionaryViewController *strongSelf = weakSelf;
@@ -74,9 +78,9 @@
     LLDictionaryStore *dictionaryStore = [LLDictionaryStore sharedStore];
     [dictionaryStore addWord:word withTranslation:translation];
     NSLog(@"data received");
- 
+    [dictionaryStore setFilterMask:_searchTextField.text];
     [self.dictionaryTableView beginUpdates];
-    NSIndexPath *path = [NSIndexPath indexPathForRow:dictionaryStore.wordsCount-1 inSection:0];
+    NSIndexPath *path = [NSIndexPath indexPathForRow:dictionaryStore.filteredWords.count-1 inSection:0];
     NSArray *indexArray = [NSArray arrayWithObjects:path, nil];
     [self.dictionaryTableView insertRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationFade];
     [self.dictionaryTableView endUpdates];
@@ -90,19 +94,34 @@
 
 #pragma mark - dictionary table view delegate
 
-#pragma mark data source
+#pragma mark tableView data source
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [LLDictionaryStore sharedStore].wordsCount;
+    return [[[LLDictionaryStore sharedStore]filteredWords] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"tableview updated");
-    NSArray *items = [[LLDictionaryStore sharedStore]getWordsWithMask:@""];
+    NSArray *items = [[LLDictionaryStore sharedStore]filteredWords];
     LLWordItem *item = items[indexPath.row];
     TwoColumnTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     cell.label1.text = [NSString stringWithFormat:@"%@", item.original];
     cell.label2.text = [NSString stringWithFormat:@"%@", item.translation];
     return cell;
 }
+
+
+#pragma mark - UISearchBar delegate
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText{
+    [[LLDictionaryStore sharedStore]setFilterMask:searchText];
+    [self.dictionaryTableView reloadData];
+}
+
+//-(BOOL)searchDisplayController:(UISearchController *)controller shouldReloadTableForSearchScope:(NSInteger)searchOption {
+//    // Tells the table data source to reload when scope bar selection changes
+//    [self filterContentForSearchText:self.searchDisplayController.searchBar.text scope:
+//     [[self.searchDisplayController.searchBar scopeButtonTitles] objectAtIndex:searchOption]];
+//    // Return YES to cause the search result table view to be reloaded.
+//    return YES;
+//}
 
 @end

@@ -34,6 +34,7 @@ static NSString * const DIC_FILE_NAME = @"words";
     self = [super init];
     if(self){
         _privateWordList = [[NSMutableArray alloc]init];
+        _filteredWordList = [[NSMutableArray alloc]init];
     }
     return  self;
 }
@@ -45,12 +46,35 @@ static NSString * const DIC_FILE_NAME = @"words";
 
 #pragma mark - get & set words
 
--(NSUInteger)wordsCount{
-    return [_privateWordList count];
+-(NSArray*)allWords{
+    return _privateWordList;
 }
 
--(NSArray*)getWordsWithMask:(NSString*)mask{
-    return _privateWordList;
+-(NSArray*)filteredWords{
+    return _filteredWordList;
+}
+
+-(void)setFilterMask:(NSString*)mask{
+    if(!mask||[mask isEqualToString:@""]){
+        
+        _filteredWordList=_privateWordList;
+        return;
+    }
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF.original contains[c] %@ or SELF.translation contains[c] %@", mask, mask];
+    _filteredWordList = [_privateWordList filteredArrayUsingPredicate:predicate];
+}
+
+-(LLWordItem*)getItemWithWord:(NSString*)word{
+    for(LLWordItem* item in _privateWordList){
+        if([item.original isEqualToString:word]){
+            return item;
+        }
+        if([item.translation isEqualToString:word]){
+            return item;
+        }
+    }
+    return nil;
 }
 
 -(void)addWord:(NSString *)word withTranslation:(NSString *)translation{
