@@ -75,7 +75,9 @@
                 break;
             }
             default:
-                [self showAlertWithTitle:NSLocalizedString(@"translateErrorTitle", @"translation error alert title") andText:NSLocalizedString(@"translateErrorText", @"translation error alert text")];                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                [strongSelf showAlertWithTitle:NSLocalizedString(@"translateErrorTitle", @"translation error alert title") andText:NSLocalizedString(@"translateErrorText", @"translation error alert text")];
+                });
                 break;
         }
     }];
