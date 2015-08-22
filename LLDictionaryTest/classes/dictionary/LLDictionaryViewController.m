@@ -61,6 +61,7 @@
         return;
     }
     if(!_isInternetAvailable){
+        [self showAlertWithTitle:NSLocalizedString(@"internetNATitle", @"internet not available alert title") andText:NSLocalizedString(@"internetNAText", @"internet not available alert text")];
         return;
     }
     __weak LLDictionaryViewController *weakSelf = self;
@@ -74,6 +75,7 @@
                 break;
             }
             default:
+                [self showAlertWithTitle:NSLocalizedString(@"translateErrorTitle", @"translation error alert title") andText:NSLocalizedString(@"translateErrorText", @"translation error alert text")];                
                 break;
         }
     }];
@@ -124,6 +126,15 @@
 
 - (void)internetStatusChanged{
    _isInternetAvailable = [LLReachability defaultReachability].reachabilityForInternetConnection;
+}
+
+- (void)showAlertWithTitle:(NSString*)title andText:(NSString*)text{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                         message:text
+                                                        delegate:nil
+                                               cancelButtonTitle:@"OK"
+                                               otherButtonTitles:nil];
+    [alert show];
 }
 
 @end
