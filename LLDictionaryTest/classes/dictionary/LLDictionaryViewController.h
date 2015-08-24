@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "ITranslationService.h"
+@class LLTwoColumnTableViewCell;
 
 @interface LLDictionaryViewController : UIViewController{
     UISearchBar *_searchTextField;
     id<TranslationServiceDelegate> _translator;
      CallBackBlock _translationCallBack;
     BOOL _isInternetAvailable;
+    LLTwoColumnTableViewCell *_prototypeCell;
 }
 
 @end

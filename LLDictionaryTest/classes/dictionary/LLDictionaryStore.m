@@ -102,9 +102,6 @@ static NSString * const DIC_FILE_NAME = @"words";
 
 -(BOOL)save{
     BOOL result = NO;
-    if([_privateWordList count]==0){
-        return NO;
-    }
     NSData *words = [NSKeyedArchiver archivedDataWithRootObject:_privateWordList];
     if(_storage){
         if ([_storage respondsToSelector:@selector(saveData:withName:)]){
@@ -120,6 +117,9 @@ static NSString * const DIC_FILE_NAME = @"words";
        @try{
            NSData *words = [_storage loadDataWithName:DIC_FILE_NAME];
             _privateWordList = [NSKeyedUnarchiver unarchiveObjectWithData:words];
+           if(!_privateWordList){
+               _privateWordList = [[NSMutableArray alloc]init];
+           }
            if([_privateWordList count]){
                [self setFilterMask:nil];
                result = YES;

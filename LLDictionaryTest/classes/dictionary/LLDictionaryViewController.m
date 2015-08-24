@@ -35,7 +35,9 @@
 }
 
 - (void)setupViewComponens{
+    _prototypeCell = [[LLTwoColumnTableViewCell alloc]init];
     self.dictionaryTableView.dataSource = self;
+    self.dictionaryTableView.delegate = self;
     [self.dictionaryTableView registerClass:[LLTwoColumnTableViewCell class] forCellReuseIdentifier:@"Cell"];
     [self.dictionaryTableView reloadData];
 
@@ -130,8 +132,34 @@
     LLWordItem *item = items[indexPath.row];
     LLTwoColumnTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
     cell.label1.text = [NSString stringWithFormat:@"%@", item.original];
+    [cell.label1 sizeToFit];
     cell.label2.text = [NSString stringWithFormat:@"%@", item.translation];
+    [cell.label2 sizeToFit];
     return cell;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSArray *items = [[LLDictionaryStore sharedStore]filteredWords];
+    LLWordItem *item = items[indexPath.row];
+    if(item){
+    _prototypeCell.label1.text = [NSString stringWithFormat:@"%@", item.original];
+    [_prototypeCell.label1 sizeToFit];
+    _prototypeCell.label2.text = [NSString stringWithFormat:@"%@", item.translation];
+    [_prototypeCell.label2 sizeToFit];
+    [_prototypeCell setNeedsUpdateConstraints];
+    [_prototypeCell layoutIfNeeded];
+//    CGSize size = [_prototypeCell.contentView systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc]init];
+        paragraphStyle.lineBreakMode = NSLineBreakByCharWrapping; //set the line break mode
+        NSDictionary *attrDict = [NSDictionary dictionaryWithObjectsAndKeys:_prototypeCell.label1.font, NSFontAttributeName, paragraphStyle, NSParagraphStyleAttributeName, nil];
+        CGSize size = [_prototypeCell.label1.text boundingRectWithSize:_prototypeCell.label1.frame.size
+                                                 options:NSStringDrawingTruncatesLastVisibleLine|NSStringDrawingUsesLineFragmentOrigin
+                                              attributes:attrDict context:nil].size;
+        
+	    return size.height+1;
+    }else{
+        return 30;
+    }
 }
 
 #pragma mark - UISearchBar delegate
@@ -151,6 +179,7 @@
 - (void)checkInternet{
     _isInternetAvailable = [LLReachability defaultReachability].reachabilityForInternetConnection;
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(internetStatusChanged) name:REACHABILITI_CHANGED object:nil];
+    [[LLReachability defaultReachability] startNotifier];
 }
 
 - (void)internetStatusChanged{

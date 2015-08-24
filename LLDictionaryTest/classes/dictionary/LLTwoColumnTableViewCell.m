@@ -16,6 +16,8 @@
     UILabel *label = [[UILabel alloc] init];
     label.translatesAutoresizingMaskIntoConstraints = NO;
     label.textAlignment = NSTextAlignmentCenter;
+    label.numberOfLines = 0;
+    label.lineBreakMode = NSLineBreakByCharWrapping;
     [self.contentView addSubview:label];
     return label;
 }
@@ -46,7 +48,11 @@
     [self.contentView addConstraints:constraints];
     
     NSArray *horizontalConstraints = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_divider]|" options:0 metrics:nil views:views];
+    NSArray *horizontalConstraints1 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_label1]|" options:0 metrics:nil views:views];
+    NSArray *horizontalConstraints2 = [NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_label2]|" options:0 metrics:nil views:views];
     [self.contentView addConstraints:horizontalConstraints];
+    [self.contentView addConstraints:horizontalConstraints1];
+    [self.contentView addConstraints:horizontalConstraints2];
     return self;
 }
 @end
